@@ -1,0 +1,22 @@
+artifact_path: /Users/rakeshjha/Assignment/MLops/Heart_Analysis/Group_125_MLops_Assignment_1/mlruns/1/models/m-3f82d7d6c2544f4095f15f8f237a5fee/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 3.8.1
+model_id: m-3f82d7d6c2544f4095f15f8f237a5fee
+model_size_bytes: 2296
+model_uuid: m-3f82d7d6c2544f4095f15f8f237a5fee
+prompts: null
+run_id: 2c87e342796d4929a2068c76725b7479
+utc_time_created: '2026-01-02 15:42:08.012857'

@@ -10,6 +10,7 @@ from sklearn.metrics import roc_auc_score
 
 from data_loader import load_and_clean_data
 from preprocessing import build_preprocessor
+from mlflow.tracking import MlflowClient
 
 def train():
     df = load_and_clean_data()
@@ -46,7 +47,27 @@ def train():
             mlflow.log_metric("roc_auc", roc)
             mlflow.sklearn.log_model(pipeline, "model")
 
-            print(f"{name} ROC-AUC: {roc}")
+            print(f"{name} ROC-AUC: {roc}")           
+
+            client = MlflowClient()
+
+            run_id = mlflow.active_run().info.run_id
+            model_uri = f"runs:/{run_id}/model"
+
+            # Register model
+            model_details = mlflow.register_model(
+                model_uri=model_uri,
+                name="Heart-Disease-MLOps"
+            )
+
+            # Promote to Production
+            client.transition_model_version_stage(
+                name="Heart-Disease-MLOps",
+                version=model_details.version,
+                stage="Production",
+                archive_existing_versions=True
+            )
+
 
 if __name__ == "__main__":
     train()
